@@ -27,6 +27,13 @@ def cycle():
     prob.printproblem(prob.getoper())
     prob.getanswer()
 
+#TODO: multiplication
+#TODO: division (with remainders)
+#TODO: ask multiple questions
+#TODO: keep score
+#TODO: keep score history
+#TODO: have different player profiles
+
 if __name__ == '__main__':
     cycle()
 
