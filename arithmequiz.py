@@ -38,7 +38,6 @@ class problemset():
         for i in range(self.problemnumbers): 
             self.res=cycle()
             if self.res: self.score +=1
-            print(self.score)
     def results(self): print("your score is %d right out of %d" %(self.score, self.problemnumbers))
 
 def cycle():
@@ -47,9 +46,15 @@ def cycle():
     prob.printproblem(prob.getoper())
     return(prob.getanswer())
 
+def playgame():
+    """creates a problem set and cycles through it"""
+    game=problemset()
+    game.doit()
+    game.results()
+
 #TODO: division (with remainders)
 #TODO: keep score history
 #TODO: have different player profiles
 
 if __name__ == '__main__':
-    cycle()
+    playgame()
