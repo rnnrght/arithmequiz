@@ -44,11 +44,11 @@ class problemset():
             print("please enter an integer")
             self.problemnumbers=raw_input("How many problems would you like? ")
         self.score=0
-    def doit(self):
+    def playit(self):
         for i in range(eval(self.problemnumbers)): 
             self.res=cycle()
             if self.res: self.score +=1
-    def results(self): 
+    def printresults(self): 
         print("your score is %d right out of %d" %(self.score, eval(self.problemnumbers)))
 
 def cycle():
@@ -60,8 +60,8 @@ def cycle():
 def playgame():
     """creates a problem set and cycles through it"""
     game=problemset()
-    game.doit()
-    game.results()
+    game.playit()
+    game.printresults()
 
 #TODO: division (with remainders)
 #TODO: keep score history
