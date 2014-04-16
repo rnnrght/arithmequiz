@@ -9,7 +9,7 @@ class problem():
         """ask the user for an operand"""
         self.op=raw_input("enter +, -, or * :")
         if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
-        else: self.getoper()
+        else: return(self.getoper())
     def printproblem(self, oper):
         """print the problem"""
         if oper=="+":
@@ -23,8 +23,13 @@ class problem():
             self.answer=self.a * self.b
     def getanswer(self):
         """get answer from the user and check it"""
-        self.ans=input(" = ")
-        if self.ans==self.answer:
+        self.ans=raw_input(" = ")
+        try:
+            if type(eval(self.ans))!=int: raise("NonIntegerInput")
+        except: 
+            print("please enter an integer")
+            self.getanswer()
+        if eval(self.ans)==self.answer:
             return(True)
         else:
             return(False)
@@ -32,13 +37,19 @@ class problem():
 class problemset():
     """represents a set of problems"""
     def __init__(self):
-        self.problemnumbers=input("How many problems would you like? ")
+        self.problemnumbers=raw_input("How many problems would you like? ")
+        try:
+            if type(eval(self.problemnumbers))!=int: raise("NonIntegerInput")
+        except:
+            print("please enter an integer")
+            self.problemnumbers=raw_input("How many problems would you like? ")
         self.score=0
     def doit(self):
-        for i in range(self.problemnumbers): 
+        for i in range(eval(self.problemnumbers)): 
             self.res=cycle()
             if self.res: self.score +=1
-    def results(self): print("your score is %d right out of %d" %(self.score, self.problemnumbers))
+    def results(self): 
+        print("your score is %d right out of %d" %(self.score, eval(self.problemnumbers)))
 
 def cycle():
     """creates a problem object, prints the problem, and gets the answer"""
