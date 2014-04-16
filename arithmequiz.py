@@ -66,6 +66,7 @@ def playgame():
 #TODO: division (with remainders)
 #TODO: keep score history
 #TODO: have different player profiles
+#TODO: random operators
 
 if __name__ == '__main__':
     playgame()
