@@ -6,10 +6,13 @@ class problem():
         self.a=random.randrange(0,10)
         self.b=random.randrange(0,10)
     def getoper(self):
-        """ask the user for an operand"""
-        self.op=raw_input("enter +, -, or * :")
-        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
-        else: return(self.getoper())
+        """pick a random operator"""
+        return(random.choice(["+","-","*"]))
+# Make this an option
+#        """ask the user for an operand"""
+#        self.op=raw_input("enter +, -, or * :")
+#        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
+#        else: return(self.getoper())
     def printproblem(self, oper):
         """print the problem"""
         if oper=="+":
@@ -63,10 +66,9 @@ def playgame():
     game.playit()
     game.printresults()
 
-#TODO: division (with remainders)
+#TODO: division
 #TODO: keep score history
 #TODO: have different player profiles
-#TODO: random operators
 
 if __name__ == '__main__':
     playgame()
