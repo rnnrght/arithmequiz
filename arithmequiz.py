@@ -3,11 +3,11 @@ import random
 class problem():
     """class for an arithmetic problem"""
     def __init__(self):
-        self.a=random.randrange(0,10)
-        self.b=random.randrange(0,10)
+        self.a=random.randrange(1,10)
+        self.b=random.randrange(1,10)
     def getoper(self):
         """pick a random operator"""
-        return(random.choice(["+","-","*"]))
+        return(random.choice(["+","-","*","/"]))
 # Make this an option
 #        """ask the user for an operand"""
 #        self.op=raw_input("enter +, -, or * :")
@@ -24,6 +24,11 @@ class problem():
         if oper=="*":
             print("%d * %d" %(self.a, self.b))
             self.answer=self.a * self.b
+        if oper=="/":
+            self.denominator=self.a
+            self.numerator=self.a * self.b
+            print("%d / %d" %(self.numerator, self.denominator))
+            self.answer=self.b
     def getanswer(self):
         """get answer from the user and check it"""
         self.ans=raw_input(" = ")
@@ -66,7 +71,6 @@ def playgame():
     game.playit()
     game.printresults()
 
-#TODO: division
 #TODO: keep score history
 #TODO: have different player profiles
 
