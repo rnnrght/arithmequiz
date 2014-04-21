@@ -1,4 +1,7 @@
 import random
+import re
+
+answerre=re.compile("\d*")
 
 class problem():
     """class for an arithmetic problem"""
@@ -8,7 +11,7 @@ class problem():
     def getoper(self):
         """pick a random operator"""
         return(random.choice(["+","-","*","/"]))
-# Make this an option
+#TODO: Make this an option
 #        """ask the user for an operand"""
 #        self.op=raw_input("enter +, -, or * :")
 #        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
@@ -33,7 +36,7 @@ class problem():
         """get answer from the user and check it"""
         self.ans=raw_input(" = ")
         try:
-            if type(eval(self.ans))!=int: raise("NonIntegerInput")
+            if not self.ans.isdigit(): raise("NonIntegerInput")
         except: 
             print("please enter an integer")
             self.getanswer()
