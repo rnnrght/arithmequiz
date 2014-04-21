@@ -1,7 +1,4 @@
 import random
-import re
-
-answerre=re.compile("\d*")
 
 class problem():
     """class for an arithmetic problem"""
