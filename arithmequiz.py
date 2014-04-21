@@ -47,7 +47,7 @@ class problemset():
     def __init__(self):
         self.problemnumbers=raw_input("How many problems would you like? ")
         try:
-            if type(eval(self.problemnumbers))!=int: raise("NonIntegerInput")
+            if not self.ans.isdigit(): raise("NonIntegerInput")
         except:
             print("please enter an integer")
             self.problemnumbers=raw_input("How many problems would you like? ")
