@@ -73,6 +73,8 @@ def playgame():
 
 #TODO: keep score history
 #TODO: have different player profiles
+#TODO: add a timer / time limit
+#TODO: add a default number of questions
 
 if __name__ == '__main__':
     playgame()
