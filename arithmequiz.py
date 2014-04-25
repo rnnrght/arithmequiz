@@ -3,9 +3,11 @@ import csv
 
 class problem():
     """class for an arithmetic problem"""
+
     def __init__(self):
         self.a=random.randrange(1,10)
         self.b=random.randrange(1,10)
+
     def getoper(self):
         """pick a random operator"""
         return(random.choice(["+","-","*","/"]))
@@ -14,6 +16,7 @@ class problem():
 #        self.op=raw_input("enter +, -, or * :")
 #        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
 #        else: return(self.getoper())
+
     def printproblem(self, oper):
         """print the problem"""
         if oper=="+":
@@ -30,6 +33,7 @@ class problem():
             self.numerator=self.a * self.b
             print("%d / %d" %(self.numerator, self.denominator))
             self.answer=self.b
+
     def getanswer(self):
         """get answer from the user and check it"""
         self.ans=raw_input(" = ")
@@ -45,6 +49,7 @@ class problem():
 
 class problemset():
     """represents a set of problems"""
+
     def __init__(self):
         self.problemnumbers=raw_input("How many problems would you like? ")
         try:
@@ -53,10 +58,12 @@ class problemset():
             print("please enter an integer")
             self.problemnumbers=raw_input("How many problems would you like? ")
         self.score=0
+
     def playit(self):
         for i in range(eval(self.problemnumbers)): 
             self.res=cycle()
             if self.res: self.score +=1
+
     def returnresults(self):
         return([self.score, eval(self.problemnumbers)])
         
