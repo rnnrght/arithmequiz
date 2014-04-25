@@ -67,7 +67,9 @@ class scorecard():
         try:
             self.scores = csv.reader(open("scorecard.csv","r"))
             self.scores = [l for l in self.scores]
+            self.hasscorefile=True
         except:
+            self.hasscorefile=False
             print("no scorefile present, someday I'll ask you to create one")
         self.player = raw_input("what is your player name? ")
 
@@ -94,7 +96,7 @@ def playgame():
     results = game.returnresults()
     print("you got %s right out of %s" % (results[0], results[1]))
     sc.addscore(game.returnresults())
-    sc.writescorefile(sc.scores)
+    if sc.hasscorefile: sc.writescorefile(sc.scores)
 
 #TODO: have different player profiles
 #TODO: add a timer / time limit
