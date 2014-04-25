@@ -1,4 +1,5 @@
 import random
+import csv
 
 class problem():
     """class for an arithmetic problem"""
@@ -56,8 +57,29 @@ class problemset():
         for i in range(eval(self.problemnumbers)): 
             self.res=cycle()
             if self.res: self.score +=1
-    def printresults(self): 
-        print("your score is %d right out of %d" %(self.score, eval(self.problemnumbers)))
+    def returnresults(self):
+        return([self.score, eval(self.problemnumbers)])
+        
+class scorecard():
+    """scorecard keeps track of scores of multiple players"""
+
+    def __init__(self):
+        try:
+            self.scores = csv.reader(open("scorecard.csv","r"))
+            self.scores = [l for l in self.scores]
+        except:
+            print("no scorefile present, someday I'll ask you to create one")
+        self.player = raw_input("what is your player name? ")
+
+    def addscore(self, score):
+        score.insert(0, self.player)
+        self.scores.append(score)
+
+    def writescorefile(self,s):
+        with open('scorecard.csv', 'wb') as f:
+            writer = csv.writer(f)
+            print s
+            writer.writerows(s)
 
 def cycle():
     """creates a problem object, prints the problem, and gets the answer"""
@@ -67,11 +89,14 @@ def cycle():
 
 def playgame():
     """creates a problem set and cycles through it"""
+    sc=scorecard()
     game=problemset()
     game.playit()
-    game.printresults()
+    print(game.returnresults())
+    sc.addscore(game.returnresults())
+    print(sc.scores)
+    sc.writescorefile(sc.scores)
 
-#TODO: keep score history
 #TODO: have different player profiles
 
 if __name__ == '__main__':
