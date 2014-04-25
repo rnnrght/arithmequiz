@@ -48,7 +48,7 @@ class problemset():
     def __init__(self):
         self.problemnumbers=raw_input("How many problems would you like? ")
         try:
-            if not self.ans.isdigit(): raise("NonIntegerInput")
+            if not self.problemnumbers.isdigit(): raise("NonIntegerInput")
         except:
             print("please enter an integer")
             self.problemnumbers=raw_input("How many problems would you like? ")
@@ -78,7 +78,6 @@ class scorecard():
     def writescorefile(self,s):
         with open('scorecard.csv', 'wb') as f:
             writer = csv.writer(f)
-            print s
             writer.writerows(s)
 
 def cycle():
@@ -92,9 +91,9 @@ def playgame():
     sc=scorecard()
     game=problemset()
     game.playit()
-    print(game.returnresults())
+    results = game.returnresults()
+    print("you got %s right out of %s" % (results[0], results[1]))
     sc.addscore(game.returnresults())
-    print(sc.scores)
     sc.writescorefile(sc.scores)
 
 #TODO: have different player profiles
