@@ -38,7 +38,7 @@ class problem():
         """get answer from the user and check it"""
         self.ans=raw_input(" = ")
         try:
-            if not self.ans.isdigit(): raise("NonIntegerInput")
+            if not self.ans.replace("-","").isdigit(): raise("NonIntegerInput")
         except: 
             print("please enter an integer")
             self.getanswer()
@@ -51,13 +51,15 @@ class problemset():
     """represents a set of problems"""
 
     def __init__(self):
+        self.score = 0
+
+    def getnumberofproblems(self):
         self.problemnumbers=raw_input("How many problems would you like? ")
         try:
             if not self.problemnumbers.isdigit(): raise("NonIntegerInput")
         except:
             print("please enter an integer")
-            self.problemnumbers=raw_input("How many problems would you like? ")
-        self.score=0
+            self.getnumberofproblems()
 
     def playit(self):
         for i in range(eval(self.problemnumbers)): 
@@ -99,11 +101,13 @@ def playgame():
     """creates a problem set and cycles through it"""
     sc=scorecard()
     game=problemset()
+    game.getnumberofproblems()
     game.playit()
     results = game.returnresults()
     print("you got %s right out of %s" % (results[0], results[1]))
-    sc.addscore(game.returnresults())
-    if sc.hasscorefile: sc.writescorefile(sc.scores)
+    if sc.hasscorefile: 
+        sc.addscore(game.returnresults())
+        sc.writescorefile(sc.scores)
 
 #TODO: have different player profiles
 #TODO: add a timer / time limit
