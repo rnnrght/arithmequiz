@@ -17,26 +17,30 @@ class problem():
 #        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
 #        else: return(self.getoper())
 
-    def printproblem(self, oper):
-        """print the problem"""
+#    def printproblem(self, oper):
+
+    def construcproblem(self, oper):
+        """construct the string representation of the problem and
+        calculate the answer
+        """
         if oper=="+":
-            print("%d + %d" %(self.a, self.b))
             self.answer=self.a + self.b
+            return("%d + %d" %(self.a, self.b))
         if oper=="-":
-            print("%d - %d" %(self.a, self.b))
-            self.answer=self.a - self.b
+            self.self=answer.a - self.b
+            return("%d - %d" %(self.a, self.b))
         if oper=="*":
-            print("%d * %d" %(self.a, self.b))
             self.answer=self.a * self.b
+            return("%d * %d" %(self.a, self.b))
         if oper=="/":
+            self.answer=self.b
             self.denominator=self.a
             self.numerator=self.a * self.b
-            print("%d / %d" %(self.numerator, self.denominator))
-            self.answer=self.b
+            return("%d / %d" %(self.numerator, self.denominator))
 
     def getanswer(self):
         """get answer from the user and check it"""
-        self.ans=raw_input(" = ")
+        self.ans=raw_input(self.construcproblem(self.getoper()) + " = ")
         try:
             if not self.ans.replace("-","").isdigit(): 
                 raise("NonIntegerInputError")
@@ -96,7 +100,6 @@ class scorecard():
 def cycle():
     """creates a problem object, prints the problem, and gets the answer"""
     prob=problem()
-    prob.printproblem(prob.getoper())
     return(prob.getanswer())
 
 def playgame():
