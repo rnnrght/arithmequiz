@@ -122,7 +122,6 @@ def playgame():
         sc.writescorefile(sc.scores)
         print("You have a total of %s correct out of %s" % sc.tallyscores())
 
-#TODO: have different player profiles
 #TODO: add a timer / time limit
 #TODO: add a default number of questions
 
