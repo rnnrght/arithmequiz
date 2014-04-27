@@ -25,7 +25,7 @@ class problem():
             self.answer=self.a + self.b
             return("%d + %d" %(self.a, self.b))
         if oper=="-":
-            self.self=answer.a - self.b
+            self.answer=self.a - self.b
             return("%d - %d" %(self.a, self.b))
         if oper=="*":
             self.answer=self.a * self.b
@@ -95,6 +95,15 @@ class scorecard():
             writer = csv.writer(f)
             writer.writerows(s)
 
+    def tallyscores(self):
+        self.correct=0
+        self.total=0
+        for score in self.scores:
+            if score[0] == self.player:
+                self.correct += int(score[1]) 
+                self.total += int(score[2])
+        return((self.correct,self.total))
+
 def cycle():
     """Creates a problem object, prints the problem, and gets the answer."""
     prob=problem()
@@ -111,6 +120,7 @@ def playgame():
     if sc.hasscorefile: 
         sc.addscore(game.returnresults())
         sc.writescorefile(sc.scores)
+        print("You have a total of %s correct out of %s" % sc.tallyscores())
 
 #TODO: have different player profiles
 #TODO: add a timer / time limit
