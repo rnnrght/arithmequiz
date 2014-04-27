@@ -12,7 +12,7 @@ class problem():
         """pick a random operator"""
         return(random.choice(["+","-","*","/"]))
 #TODO: Make this an option
-#        """ask the user for an operand"""
+#        """ask the user for an operator"""
 #        self.op=raw_input("enter +, -, or * :")
 #        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
 #        else: return(self.getoper())
@@ -38,7 +38,8 @@ class problem():
         """get answer from the user and check it"""
         self.ans=raw_input(" = ")
         try:
-            if not self.ans.replace("-","").isdigit(): raise("NonIntegerInput")
+            if not self.ans.replace("-","").isdigit(): 
+                raise("NonIntegerInputError")
         except: 
             print("please enter an integer")
             self.getanswer()
@@ -56,7 +57,8 @@ class problemset():
     def getnumberofproblems(self):
         self.problemnumbers=raw_input("How many problems would you like? ")
         try:
-            if not self.problemnumbers.isdigit(): raise("NonIntegerInput")
+            if not self.problemnumbers.isdigit(): 
+                raise("NonIntegerInputError")
         except:
             print("please enter an integer")
             self.getnumberofproblems()
