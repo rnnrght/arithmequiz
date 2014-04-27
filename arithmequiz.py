@@ -2,14 +2,14 @@ import random
 import csv
 
 class problem():
-    """class for an arithmetic problem"""
+    """Class for an arithmetic problem."""
 
     def __init__(self):
         self.a=random.randrange(1,10)
         self.b=random.randrange(1,10)
 
     def getoper(self):
-        """pick a random operator"""
+        """Pick a random operator"""
         return(random.choice(["+","-","*","/"]))
 #TODO: Make this an option
 #        """ask the user for an operator"""
@@ -17,11 +17,9 @@ class problem():
 #        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
 #        else: return(self.getoper())
 
-#    def printproblem(self, oper):
-
     def construcproblem(self, oper):
-        """construct the string representation of the problem and
-        calculate the answer
+        """Construct the string representation of the problem and
+        calculate the answer.
         """
         if oper=="+":
             self.answer=self.a + self.b
@@ -39,13 +37,13 @@ class problem():
             return("%d / %d" %(self.numerator, self.denominator))
 
     def getanswer(self):
-        """get answer from the user and check it"""
+        """Print problem, get answer from the user, and check it."""
         self.ans=raw_input(self.construcproblem(self.getoper()) + " = ")
         try:
             if not self.ans.replace("-","").isdigit(): 
                 raise("NonIntegerInputError")
         except: 
-            print("please enter an integer")
+            print("Please enter an integer")
             self.getanswer()
         if eval(self.ans)==self.answer:
             return(True)
@@ -53,7 +51,7 @@ class problem():
             return(False)
 
 class problemset():
-    """represents a set of problems"""
+    """Represents a set of problems."""
 
     def __init__(self):
         self.score = 0
@@ -64,7 +62,7 @@ class problemset():
             if not self.problemnumbers.isdigit(): 
                 raise("NonIntegerInputError")
         except:
-            print("please enter an integer")
+            print("Please enter an integer.")
             self.getnumberofproblems()
 
     def playit(self):
@@ -76,7 +74,7 @@ class problemset():
         return([self.score, eval(self.problemnumbers)])
         
 class scorecard():
-    """scorecard keeps track of scores of multiple players"""
+    """Keeps track of scores of multiple players."""
 
     def __init__(self):
         try:
@@ -85,8 +83,8 @@ class scorecard():
             self.hasscorefile=True
         except:
             self.hasscorefile=False
-            print("no scorefile present, someday I'll ask you to create one")
-        self.player = raw_input("what is your player name? ")
+            print("No scorefile present, someday I'll ask you to create one.")
+        self.player = raw_input("What is your player name? ")
 
     def addscore(self, score):
         score.insert(0, self.player)
@@ -98,18 +96,18 @@ class scorecard():
             writer.writerows(s)
 
 def cycle():
-    """creates a problem object, prints the problem, and gets the answer"""
+    """Creates a problem object, prints the problem, and gets the answer."""
     prob=problem()
     return(prob.getanswer())
 
 def playgame():
-    """creates a problem set and cycles through it"""
+    """Creates a problem set and cycles through it."""
     sc=scorecard()
     game=problemset()
     game.getnumberofproblems()
     game.playit()
     results = game.returnresults()
-    print("you got %s right out of %s" % (results[0], results[1]))
+    print("You got %s right out of %s." % (results[0], results[1]))
     if sc.hasscorefile: 
         sc.addscore(game.returnresults())
         sc.writescorefile(sc.scores)
