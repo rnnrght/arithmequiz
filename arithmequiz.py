@@ -1,6 +1,8 @@
 import random
 import csv
 
+class NonIntegerError(Exception): pass 
+
 class problem():
     """Class for an arithmetic problem."""
 
@@ -41,8 +43,8 @@ class problem():
         self.ans=raw_input(self.construcproblem(self.getoper()) + " = ")
         try:
             if not self.ans.replace("-","").isdigit(): 
-                raise("NonIntegerInputError")
-        except: 
+                raise NonIntegerError 
+        except NonIntegerError: 
             print("Please enter an integer")
             self.getanswer()
         if eval(self.ans)==self.answer:
@@ -60,8 +62,8 @@ class problemset():
         self.problemnumbers=raw_input("How many problems would you like? ")
         try:
             if not self.problemnumbers.isdigit(): 
-                raise("NonIntegerInputError")
-        except:
+                raise NonIntegerError 
+        except NonIntegerError:
             print("Please enter an integer.")
             self.getnumberofproblems()
 
