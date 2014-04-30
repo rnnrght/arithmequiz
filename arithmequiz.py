@@ -1,5 +1,6 @@
 import random
 import csv
+import time
 
 class NonIntegerError(Exception): pass 
 
@@ -116,15 +117,19 @@ def playgame():
     sc=scorecard()
     game=problemset()
     game.getnumberofproblems()
+    starttime=time.time()
     game.playit()
+    endtime=time.time()
+    elapsedtime=endtime-starttime
     results = game.returnresults()
-    print("You got %s right out of %s." % (results[0], results[1]))
+    print("You got %s right out of %s in %s seconds." % (results[0], results[1], elapsedtime))
     if sc.hasscorefile: 
-        sc.addscore(game.returnresults())
+	results.append(elapsedtime)
+	sc.addscore(results)
         sc.writescorefile(sc.scores)
         print("You have a total of %s correct out of %s" % sc.tallyscores())
 
-#TODO: add a timer / time limit
+#TODO: time limit
 #TODO: add a default number of questions
 
 if __name__ == '__main__':
