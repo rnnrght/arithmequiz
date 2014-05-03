@@ -101,11 +101,13 @@ class scorecard():
     def tallyscores(self):
         self.correct=0
         self.total=0
+        self.time=0.
         for score in self.scores:
             if score[0] == self.player:
                 self.correct += int(score[1]) 
                 self.total += int(score[2])
-        return((self.correct,self.total))
+                self.time += float(score[3])
+        return((self.correct, self.total, self.time))
 
 def cycle():
     """Creates a problem object, prints the problem, and gets the answer."""
@@ -124,10 +126,12 @@ def playgame():
     results = game.returnresults()
     print("You got %s right out of %s in %s seconds." % (results[0], results[1], elapsedtime))
     if sc.hasscorefile: 
-	results.append(elapsedtime)
-	sc.addscore(results)
+        results.append(elapsedtime)
+        sc.addscore(results)
         sc.writescorefile(sc.scores)
-        print("You have a total of %s correct out of %s" % sc.tallyscores())
+        scoretally = sc.tallyscores()
+        print("You have a total of %s correct out of %s in %s seconds." % scoretally)
+        print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
 
 #TODO: time limit
 #TODO: add a default number of questions
