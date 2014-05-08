@@ -1,6 +1,7 @@
 import random
 import csv
 import time
+import sys
 
 class NonIntegerError(Exception): pass 
 
@@ -133,8 +134,29 @@ def playgame():
         print("You have a total of %s correct out of %s in %s seconds." % scoretally)
         print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
 
+def gamemenu():
+    print("""
+    1 play game
+    2 view scores
+    3 quit""")
+    sel = raw_input("enter your choice: ")
+    if sel == "1":
+        playgame()
+        gamemenu()
+    elif sel == "2":
+        sc = scorecard()
+        scoretally = sc.tallyscores()
+        print("You have a total of %s correct out of %s in %s seconds." % scoretally)
+        print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
+        gamemenu()
+    elif sel == "3":
+        sys.exit()
+    else: 
+        gamemenu()
+
+
 #TODO: time limit
 #TODO: add a default number of questions
 
 if __name__ == '__main__':
-    playgame()
+    gamemenu()
