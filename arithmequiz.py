@@ -89,7 +89,13 @@ class scorecard():
             self.hasscorefile=True
         except:
             self.hasscorefile=False
-            print("No scorefile present, someday I'll ask you to create one.")
+            createFile = raw_input("would you like me to create a scorefile?[y/n]  ")
+            if createFile == "y" or "Y":
+                self.scores = []
+                self.hasscorefile = True
+            else: #createFile == "n" or "N":
+                print("OK.  Scores will not be recorded.")
+                self.hasscorefile = False
         self.player = raw_input("What is your player name? ")
 
     def addscore(self, score):
@@ -105,12 +111,15 @@ class scorecard():
         self.correct=0
         self.total=0
         self.time=0.
-        for score in self.scores:
-            if score[0] == self.player:
-                self.correct += int(score[1]) 
-                self.total += int(score[2])
-                self.time += float(score[3])
-        return((self.correct, self.total, self.time))
+        if self.scores == []:
+            return(False)
+        else:
+            for score in self.scores:
+                if score[0] == self.player:
+                    self.correct += int(score[1]) 
+                    self.total += int(score[2])
+                    self.time += float(score[3])
+            return((self.correct, self.total, self.time))
 
 def cycle():
     """Creates a problem object, prints the problem, and gets the answer."""
@@ -148,9 +157,13 @@ def gamemenu():
     elif sel == "2":
         sc = scorecard()
         scoretally = sc.tallyscores()
-        print("You have a total of %s correct out of %s in %s seconds." % scoretally)
-        print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
-        gamemenu()
+        if scoretally:
+            print("You have a total of %s correct out of %s in %s seconds." % scoretally)
+            print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
+            gamemenu()
+        else: 
+            print("You seem to have an empty scorecard.  Play some games, won't you?")
+            gamemenu()
     elif sel == "3":
         sys.exit()
     else: 
