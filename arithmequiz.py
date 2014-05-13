@@ -111,15 +111,22 @@ class scorecard():
         self.correct=0
         self.total=0
         self.time=0.
-        if self.scores == []:
-            return(False)
-        else:
-            for score in self.scores:
-                if score[0] == self.player:
-                    self.correct += int(score[1]) 
-                    self.total += int(score[2])
-                    self.time += float(score[3])
-            return((self.correct, self.total, self.time))
+#        if self.scores == []:
+#            return(False)
+#        else:
+        for score in self.scores:
+            if score[0] == self.player:
+                self.correct += int(score[1]) 
+                self.total += int(score[2])
+                self.time += float(score[3])
+        return((self.correct, self.total, self.time))
+
+    def printscoretally(self):
+        self.scoretally = self.tallyscores()
+        print("You have a total of %s correct out of %s in %s seconds." % self.scoretally)
+        print("%s seconds per problem, %s seconds per correct answer" % (
+        self.scoretally[0]/self.scoretally[2], self.scoretally[1]/self.scoretally[2]))
+
 
 def cycle():
     """Creates a problem object, prints the problem, and gets the answer."""
@@ -136,32 +143,30 @@ def playgame():
     endtime=time.time()
     elapsedtime=endtime-starttime
     results = game.returnresults()
-    print("You got %s right out of %s in %s seconds." % (results[0], results[1], elapsedtime))
+    print("\nYou got %s right out of %s in %s seconds." % (results[0], results[1], elapsedtime))
     if sc.hasscorefile: 
         results.append(elapsedtime)
         sc.addscore(results)
         sc.writescorefile(sc.scores)
-        scoretally = sc.tallyscores()
-        print("You have a total of %s correct out of %s in %s seconds." % scoretally)
-        print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
+        sc.printscoretally()
 
 def gamemenu():
     print("""
-    1 play game
-    2 view scores
-    3 quit""")
-    sel = raw_input("enter your choice: ")
+1 Play game
+2 View scores
+3 Quit
+    """)
+    sel = raw_input("Enter your choice: ")
     if sel == "1":
         playgame()
         gamemenu()
     elif sel == "2":
         sc = scorecard()
         scoretally = sc.tallyscores()
-        if scoretally:
-            print("You have a total of %s correct out of %s in %s seconds." % scoretally)
-            print("%s seconds per problem, %s seconds per correct answer" % (scoretally[0]/scoretally[2], scoretally[1]/scoretally[2]))
+        if scoretally != (0, 0, 0.0):
+            sc.printscoretally()
             gamemenu()
-        else: 
+        else:
             print("You seem to have an empty scorecard.  Play some games, won't you?")
             gamemenu()
     elif sel == "3":
