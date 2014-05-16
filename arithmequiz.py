@@ -14,6 +14,7 @@ import sys
 
 class NonIntegerError(Exception): pass 
 
+
 class problem():
     """Class for an arithmetic problem."""
 
@@ -58,6 +59,7 @@ class problem():
         else:
             return(False)
 
+
 class problemset():
     """Represents a set of problems."""
 
@@ -80,7 +82,8 @@ class problemset():
 
     def returnresults(self):
         return([self.score, eval(self.problemnumbers)])
-        
+
+
 class scorecard():
     """Keeps track of scores of multiple players."""
 
@@ -174,5 +177,4 @@ def gamemenu():
         gamemenu()
 
 if __name__ == '__main__':
-
     gamemenu()
