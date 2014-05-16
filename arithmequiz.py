@@ -5,6 +5,13 @@ import csv
 import time
 import sys
 
+
+#TODO: time limit
+#TODO: add a default number of questions
+#TODO: Make an option to the ask user for an operator
+#TODO: make scorefile.csv a dotfile in user home dir
+
+
 class NonIntegerError(Exception): pass 
 
 class problem():
@@ -17,11 +24,6 @@ class problem():
     def getoper(self):
         """Pick a random operator"""
         return(random.choice(["+","-","*","/"]))
-#TODO: Make this an option
-#        """ask the user for an operator"""
-#        self.op=raw_input("enter +, -, or * :")
-#        if self.op=="+" or self.op=="-" or self.op=="*": return(self.op)
-#        else: return(self.getoper())
 
     def construcproblem(self, oper):
         """Construct the string representation of the problem and
@@ -111,9 +113,6 @@ class scorecard():
         self.correct=0
         self.total=0
         self.time=0.
-#        if self.scores == []:
-#            return(False)
-#        else:
         for score in self.scores:
             if score[0] == self.player:
                 self.correct += int(score[1]) 
@@ -174,9 +173,6 @@ def gamemenu():
     else: 
         gamemenu()
 
-
-#TODO: time limit
-#TODO: add a default number of questions
-
 if __name__ == '__main__':
+
     gamemenu()
